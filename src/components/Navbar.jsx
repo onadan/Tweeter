@@ -14,6 +14,7 @@ export default Navbar
 
 const Nav = styled.nav`
 width: 100%;
-height:15vh;
+height:10vh;
 display:flex;
+box-shadow: 0px 0px 2px 4px rgba(0,0,0,0.1);
 `
