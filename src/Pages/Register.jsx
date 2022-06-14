@@ -1,21 +1,29 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import styled from 'styled-components'
+import Loader from '../components/Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import { Login } from '../store/auth'
 
 function Register() {
   document.title = "Register an account on Tweeter"
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const registerAccount = (e) =>{
-    e.preventDefault()
-    console.log(email, password);
-  }
+  // const registerAccount = (e) =>{
+  //   e.preventDefault()
+  //   console.log(email, password);
+  // }
+  const {loading} = useSelector((state)=> state.auth)
+  const dispatch = useDispatch()
   return (
     <div>
       <Navbar />
       <Container>
         <h1 style={{color: '#0C47A1'}}>Join Tweeter Today</h1>
-        <form onSubmit={registerAccount}>
+        <form onSubmit={(e)=>{
+          e.preventDefault()
+          dispatch(Login({email, password}))}
+          }>
           <FormData>
             <label htmlFor="email">Email Address:</label>
             <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)} required/>
@@ -24,7 +32,10 @@ function Register() {
             <label htmlFor="password">Password:</label>
             <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)} required/>
           </FormData>
-          <Button>Register</Button>
+          <Button>
+            {loading && <Loader />}
+            {!loading && <p>Register</p>}
+          </Button>
         </form>
       </Container>
     </div>
@@ -77,11 +88,16 @@ input{
 
 const Button = styled.button`
 background: #0C47A1;
+display:flex;
+flex-direction:column;
+align-items:center;
 outline:none;
 border:none;
 color:#fff;
 border-radius:5px;
-padding:15px 0;
+height:50px;
+width:100%;
 cursor:pointer;
 font-size:16px;
+
 `
