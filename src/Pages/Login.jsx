@@ -7,7 +7,7 @@ import { Login } from '../store/auth'
 
 function Register() {
   document.title = "Login To Tweeter"
-  
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -17,7 +17,7 @@ function Register() {
     <div>
       <Navbar />
       <Container>
-        
+
         <h1 style={{color: '#0C47A1'}}>Login</h1>
         <form onSubmit={(e)=>{
           e.preventDefault()
@@ -33,7 +33,7 @@ function Register() {
           </FormData>
           <Button>
             {loading && <Loader />}
-            {!loading && <p>Register</p>}
+            {!loading && <p>Login</p>}
           </Button>
         </form>
       </Container>
